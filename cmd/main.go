@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/LoveCatdd/micro0/client"
+	micro0 "github.com/LoveCatdd/micro0/core"
 	"github.com/LoveCatdd/micro0/internal/api"
 	"github.com/LoveCatdd/micro0/internal/middleware"
 
@@ -20,17 +21,14 @@ var etcdServer []string
 func main() {
 
 	http.NewAppEngine(gin.Default())
-	registry, err := client.NewServiceRegistry(etcdServer)
-	if err != nil {
-		log.Fatal(err)
-	}
+	micro0.Registry, _ = client.NewServiceRegistry(etcdServer)
 
 	v1 := http.RootRouterGroup().Group("/api/v1")
 	{
 		v1.Use(middleware.CorsMiddleware())
 		impl := api.ApiImpl{}
-		impl.RouterDefaultApi(v1.Group(""), registry)
-		impl.HealthDefaultApi(v1.Group(""))
+		impl.RouterDefaultApi(v1.Group(""))
+		micro0.HealthDefaultApi(v1.Group(""))
 	}
 
 	http.Run()

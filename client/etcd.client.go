@@ -13,7 +13,6 @@ import (
 	"github.com/LoveCatdd/micro0/internal/model"
 
 	"github.com/LoveCatdd/util/pkg/lib/core/log"
-	"github.com/gin-gonic/gin"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
@@ -127,7 +126,7 @@ func (r *ServiceRegistry) Heartbeat(service model.Service) error {
 	}
 
 	// 检查服务是否健康
-	if resp, err := r.RemoteFunc(ctx, service.Name, http.MethodGet, "/health", nil); err != nil {
+	if resp, err := RemoteFunc(r, ctx, service.Name, http.MethodGet, "/health", nil); err != nil {
 		return fmt.Errorf("failed to check health: %w", err)
 	} else {
 		// 解析出resp.body json:{"code":0,"codeName":"success","message":"","resp":{"health":true},"url":""}
@@ -172,38 +171,8 @@ func (r *ServiceRegistry) StartHeartbeat(ctx context.Context, service model.Serv
 	}()
 }
 
-// 路由分发， gateway 作为网关，转发请求到对应的服务 service-a:{ip:localhost, port:8081}
-// 通过 etcd 注册服务，网关根据请求的路径和方法来决定转发到哪个服务
-// 如： http://localhost:8080/service/service-a/api/v1/func-a => http://localhost:8081/api/v1/func-a
-func RouteHandler(c *gin.Context) {
-	// // 获取请求的路径和方法
-	// path := c.Request.URL.Path
-	// method := c.Request.Method
-
-	// // 根据路径和方法决定转发到哪个服务
-	// var serviceName string
-	// switch {
-	// case path == "/service/service-a/api/v1/func-a" && method == "POST":
-	// 	serviceName = "service-a"
-	// case path == "/service/service-b/api/v1/func-b" && method == "GET":
-	// 	serviceName = "service-b"
-	// default:
-	// 	c.JSON(http.StatusNotFound, gin.H{"error": "service not found"})
-	// 	return
-	// }
-
-	// // 调用远程服务的函数，传递请求参数
-	// resp, err := RemoteFunc(c, serviceName, method, c.Request.Body)
-	// if err != nil {
-	// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-	// 	return
-	// }
-
-	// c.JSON(http.StatusOK, resp)
-}
-
 // // 编写远程调用工具函数：如service-a 调用 service-b 服务中的函数
-func (r *ServiceRegistry) RemoteFunc(ctx context.Context, serviceName, method, path string, req map[string]any) (resp *http.Response, err error) {
+func RemoteFunc(r *ServiceRegistry, ctx context.Context, serviceName, method, path string, req map[string]any) (resp *http.Response, err error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -245,27 +214,4 @@ func HttpFunc(ctx context.Context, url, method string, req map[string]any) (*htt
 	default:
 		return nil, fmt.Errorf("unsupported method: %s", method)
 	}
-}
-
-// 获取所有服务列表
-func (r *ServiceRegistry) GetAllServices(ctx context.Context) ([]ServiceInstance, error) {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-
-	key := "/service/"
-	resp, err := r.client.Get(ctx, key, clientv3.WithPrefix())
-	if err != nil {
-		return nil, err
-	}
-	fmt.Printf("服务列表resp: %v", resp)
-	var services []ServiceInstance
-	for _, kv := range resp.Kvs {
-		var si ServiceInstance
-		if err := json.Unmarshal(kv.Value, &si); err != nil {
-			return nil, err
-		}
-		services = append(services, si)
-	}
-
-	return services, nil
 }

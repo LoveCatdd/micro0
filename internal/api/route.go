@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/LoveCatdd/micro0/client"
+	micro0 "github.com/LoveCatdd/micro0/core"
 	"github.com/LoveCatdd/micro0/internal/model"
 
 	"github.com/LoveCatdd/util/pkg/lib/core/log"
@@ -15,7 +16,7 @@ import (
 
 type ApiImpl struct{}
 
-func (ApiImpl) RouterDefaultApi(r *gin.RouterGroup, registry *client.ServiceRegistry) {
+func (ApiImpl) RouterDefaultApi(r *gin.RouterGroup) {
 
 	r.POST("registry", func(c *gin.Context) {
 		var service model.Service
@@ -28,7 +29,7 @@ func (ApiImpl) RouterDefaultApi(r *gin.RouterGroup, registry *client.ServiceRegi
 			return
 		}
 
-		if err := registry.Registry(&client.ServiceInstance{
+		if err := micro0.Registry.Registry(&client.ServiceInstance{
 			ServiceName: service.Name,
 			Version:     service.Version,
 			InstanceID:  service.InstanceID,
@@ -41,14 +42,6 @@ func (ApiImpl) RouterDefaultApi(r *gin.RouterGroup, registry *client.ServiceRegi
 		}
 		log.Infof("服务注册成功！%v", service)
 
-		registry.StartHeartbeat(context.Background(), service, 10)
-	})
-}
-
-func (ApiImpl) HealthDefaultApi(r *gin.RouterGroup) {
-	r.GET("health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, map[string]bool{
-			"health": true,
-		})
+		micro0.Registry.StartHeartbeat(context.Background(), service, 10)
 	})
 }
