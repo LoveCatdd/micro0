@@ -1,10 +1,11 @@
 package main
 
 import (
-	"micro0/client"
-	"micro0/internal/api"
-	"micro0/internal/middleware"
 	"os"
+
+	"github.com/LoveCatdd/micro0/client"
+	"github.com/LoveCatdd/micro0/internal/api"
+	"github.com/LoveCatdd/micro0/internal/middleware"
 
 	"github.com/LoveCatdd/util/pkg/lib/core/log"
 	"github.com/LoveCatdd/util/pkg/lib/core/viper"
