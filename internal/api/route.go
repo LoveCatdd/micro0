@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/LoveCatdd/micro0/client"
 	micro0 "github.com/LoveCatdd/micro0/core"
@@ -42,6 +43,6 @@ func (ApiImpl) RouterDefaultApi(r *gin.RouterGroup) {
 		}
 		log.Infof("服务注册成功！%v", service)
 
-		micro0.Registry.StartHeartbeat(context.Background(), service, 10)
+		micro0.Registry.StartHeartbeat(context.Background(), service, 15*time.Second)
 	})
 }

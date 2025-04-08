@@ -126,10 +126,9 @@ func (r *ServiceRegistry) Heartbeat(service model.Service) error {
 	}
 
 	// 检查服务是否健康
-	if resp, err := RemoteFunc(r, ctx, service.Name, http.MethodGet, "/health", nil); err != nil {
+	if resp, err := RemoteFunc(r, ctx, service.Name, http.MethodGet, "health", nil); err != nil {
 		return fmt.Errorf("failed to check health: %w", err)
 	} else {
-		// 解析出resp.body json:{"code":0,"codeName":"success","message":"","resp":{"health":true},"url":""}
 
 		var healthResp map[string]bool
 		if err := json.NewDecoder(resp.Body).Decode(&healthResp); err != nil {
@@ -150,6 +149,8 @@ func (r *ServiceRegistry) Heartbeat(service model.Service) error {
 }
 
 func (r *ServiceRegistry) StartHeartbeat(ctx context.Context, service model.Service, interval time.Duration) {
+
+	// Heartbeat
 	go func() {
 		ticker := time.NewTicker(interval)
 		defer ticker.Stop()
@@ -161,6 +162,7 @@ func (r *ServiceRegistry) StartHeartbeat(ctx context.Context, service model.Serv
 				if err != nil {
 					log.Infof("[Heartbeat ERROR] service: %s, err: %v", service.Name, err)
 					delete(srvLeaseMap, fmt.Sprintf(Key, service.Name)) // 删除服务的租约ID
+					// Heartbeat STOPPED
 					return
 				}
 			case <-ctx.Done():
@@ -169,6 +171,7 @@ func (r *ServiceRegistry) StartHeartbeat(ctx context.Context, service model.Serv
 			}
 		}
 	}()
+
 }
 
 // // 编写远程调用工具函数：如service-a 调用 service-b 服务中的函数

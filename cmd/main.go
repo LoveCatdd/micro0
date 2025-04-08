@@ -3,7 +3,6 @@ package main
 import (
 	"os"
 
-	"github.com/LoveCatdd/micro0/client"
 	micro0 "github.com/LoveCatdd/micro0/core"
 	"github.com/LoveCatdd/micro0/internal/api"
 	"github.com/LoveCatdd/micro0/internal/middleware"
@@ -16,12 +15,9 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var etcdServer []string
-
 func main() {
 
 	http.NewAppEngine(gin.Default())
-	micro0.Registry, _ = client.NewServiceRegistry(etcdServer)
 
 	v1 := http.RootRouterGroup().Group("/api/v1")
 	{
@@ -41,12 +37,6 @@ func init() {
 	viper.SetEnviro(environ)
 
 	viper.Yaml(server.AppConf)
-
-	viper.Yaml(client.Etcd)
-
-	for _, server := range client.Etcd.Etcd.Server {
-		etcdServer = append(etcdServer, server.Ip+":"+server.Port)
-	}
 
 	viper.Yaml(log.Config)
 	if log.Config.Zap.Enable { // 开启
