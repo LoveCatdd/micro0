@@ -1,0 +1,27 @@
+zap:
+  enable: true
+  prefix: ""
+  timeFormat: "2006-01-02 15:04:05"
+  level: debug
+  caller: true
+  stackTrace: true
+  encode: console
+  # 日志输出到哪里 file | console | both
+  writer: both
+  logFile:
+    maxSize: 50
+    backups: 15
+    compress: false
+    output:
+      - ./log/novel.log
+
+server:
+  name: micro0
+  port: 8080
+
+etcd:
+  server:
+    - ip: 127.0.0.1
+      port: 2379
+    - ip: 127.0.0.1
+      port: 2380

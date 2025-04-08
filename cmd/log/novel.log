@@ -1,0 +1,148 @@
+2025-04-07 23:42:26	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-07 23:43:42	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:09:01	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:09:57	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:18:02	traceId: e0f0bd13-13cb-11f0-9887-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:18:07	traceId: e0f0bd13-13cb-11f0-9887-e4a8dfaceb3c	ERROR	api/route.go:38	服务注册失败！ context deadline exceeded
+
+micro0/internal/api.ApiImpl.RouterDefaultApi.func1
+	D:/go server/micro0/internal/api/route.go:38
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+main.main.CorsMiddleware.func1
+	D:/go server/micro0/internal/middleware/cors.go:16
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/LoveCatdd/webctx/pkg/lib/core/web/http.NewAppEngine.TraceMiddleware.func1
+	D:/gomodrepo/github.com/!love!catdd/webctx@v1.0.26/pkg/lib/core/web/middleware/trace.log.middleware.go:39
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/recovery.go:102
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/logger.go:249
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/gin.go:633
+github.com/gin-gonic/gin.(*Engine).ServeHTTP
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/gin.go:589
+net/http.serverHandler.ServeHTTP
+	C:/Program Files/go/src/net/http/server.go:3301
+net/http.(*conn).serve
+	C:/Program Files/go/src/net/http/server.go:2102
+2025-04-08 00:18:07	traceId: e0f0bd13-13cb-11f0-9887-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:43	requst_info end: status: 200, path: /micro0/api/v1/registry, method: POST, ip: ::1, cost: 5.0231123s, response_body: 
+2025-04-08 00:19:59	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:20:11	traceId: 2e3c60e7-13cc-11f0-940c-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:21:11	traceId: 2e3c60e7-13cc-11f0-940c-e4a8dfaceb3c	ERROR	api/route.go:38	服务注册失败！ context deadline exceeded
+
+micro0/internal/api.ApiImpl.RouterDefaultApi.func1
+	D:/go server/micro0/internal/api/route.go:38
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+main.main.CorsMiddleware.func1
+	D:/go server/micro0/internal/middleware/cors.go:16
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/LoveCatdd/webctx/pkg/lib/core/web/http.NewAppEngine.TraceMiddleware.func1
+	D:/gomodrepo/github.com/!love!catdd/webctx@v1.0.26/pkg/lib/core/web/middleware/trace.log.middleware.go:39
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/recovery.go:102
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/logger.go:249
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/gin.go:633
+github.com/gin-gonic/gin.(*Engine).ServeHTTP
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/gin.go:589
+net/http.serverHandler.ServeHTTP
+	C:/Program Files/go/src/net/http/server.go:3301
+net/http.(*conn).serve
+	C:/Program Files/go/src/net/http/server.go:2102
+2025-04-08 00:21:11	traceId: 2e3c60e7-13cc-11f0-940c-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:43	requst_info end: status: 200, path: /micro0/api/v1/registry, method: POST, ip: ::1, cost: 1m0.0227204s, response_body: 
+2025-04-08 00:28:43	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:29:03	traceId: 6b22f005-13cd-11f0-9e90-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:29:08	traceId: 6b22f005-13cd-11f0-9e90-e4a8dfaceb3c	ERROR	api/route.go:38	服务注册失败！ context deadline exceeded
+
+micro0/internal/api.ApiImpl.RouterDefaultApi.func1
+	D:/go server/micro0/internal/api/route.go:38
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+main.main.CorsMiddleware.func1
+	D:/go server/micro0/internal/middleware/cors.go:16
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/LoveCatdd/webctx/pkg/lib/core/web/http.NewAppEngine.TraceMiddleware.func1
+	D:/gomodrepo/github.com/!love!catdd/webctx@v1.0.26/pkg/lib/core/web/middleware/trace.log.middleware.go:39
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/recovery.go:102
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/logger.go:249
+github.com/gin-gonic/gin.(*Context).Next
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/gin.go:633
+github.com/gin-gonic/gin.(*Engine).ServeHTTP
+	D:/gomodrepo/github.com/gin-gonic/gin@v1.10.0/gin.go:589
+net/http.serverHandler.ServeHTTP
+	C:/Program Files/go/src/net/http/server.go:3301
+net/http.(*conn).serve
+	C:/Program Files/go/src/net/http/server.go:2102
+2025-04-08 00:29:08	traceId: 6b22f005-13cd-11f0-9e90-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:43	requst_info end: status: 200, path: /micro0/api/v1/registry, method: POST, ip: ::1, cost: 5.0214557s, response_body: 
+2025-04-08 00:38:18	traceId: b60290e2-13ce-11f0-9e90-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:38:18	traceId: b60290e2-13ce-11f0-9e90-e4a8dfaceb3c	INFO	client/etcd.client.go:87	Registered service: /service/service-b
+2025-04-08 00:41:49	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:42:10	traceId: 404cdb9c-13cf-11f0-9285-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:42:10	traceId: 404cdb9c-13cf-11f0-9285-e4a8dfaceb3c	INFO	client/etcd.client.go:87	Registered service: /service/service-b
+2025-04-08 00:45:29	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:46:27	traceId: d9a79dc1-13cf-11f0-8f4b-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:46:27	traceId: d9a79dc1-13cf-11f0-8f4b-e4a8dfaceb3c	INFO	client/etcd.client.go:87	Registered service: /service/service-b
+2025-04-08 00:48:19	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:48:29	traceId: 220fd409-13d0-11f0-b808-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:48:29	traceId: 220fd409-13d0-11f0-b808-e4a8dfaceb3c	INFO	client/etcd.client.go:87	Registered service: /service/service-b
+2025-04-08 00:52:55	traceId: c0bbdd07-13d0-11f0-b808-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:53:54	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 00:54:02	traceId: e8909b7a-13d0-11f0-9bd4-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:54:02	traceId: e8909b7a-13d0-11f0-9bd4-e4a8dfaceb3c	INFO	client/etcd.client.go:87	Registered service: /service/service-b
+2025-04-08 00:55:21	traceId: 1793970c-13d1-11f0-9bd4-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 00:57:00	traceId: 52eeabdb-13d1-11f0-9bd4-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 15:01:45	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 15:02:07	traceId: 622334ec-1447-11f0-a0de-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 15:02:07	traceId: 622334ec-1447-11f0-a0de-e4a8dfaceb3c	INFO	client/etcd.client.go:87	Registered service: /service/service-b
+2025-04-08 15:04:08	traceId: aa4e438a-1447-11f0-a0de-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 15:11:06	traceId: a3da5108-1448-11f0-a0de-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 15:12:49	traceId: e1261fb9-1448-11f0-a0de-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 15:14:36	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 15:14:51	traceId: 29828958-1449-11f0-911f-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 15:14:51	traceId: 29828958-1449-11f0-911f-e4a8dfaceb3c	INFO	client/etcd.client.go:87	Registered service: /service/service-b
+2025-04-08 15:14:51	traceId: 29828958-1449-11f0-911f-e4a8dfaceb3c	INFO	api/route.go:41	服务注册成功！{service-b v1.0.0  127.0.0.1 8081}
+2025-04-08 15:14:51	traceId: 29828958-1449-11f0-911f-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:43	requst_info end: status: 200, path: /micro0/api/v1/registry, method: POST, ip: ::1, cost: 42.7259ms, response_body: 
+2025-04-08 15:42:34	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <POST /micro0/api/v1/health --> micro0/internal/api.ApiImpl.RouterDefaultApi.func2>	]
+2025-04-08 15:42:58	traceId: 17297551-144d-11f0-b7d5-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 15:42:58	traceId: 17297551-144d-11f0-b7d5-e4a8dfaceb3c	INFO	client/etcd.client.go:87	Registered service: /service/service-b
+2025-04-08 15:42:58	traceId: 17297551-144d-11f0-b7d5-e4a8dfaceb3c	INFO	api/route.go:41	服务注册成功！{service-b v1.0.0  127.0.0.1 8081}
+2025-04-08 15:42:58	traceId: 17297551-144d-11f0-b7d5-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:43	requst_info end: status: 200, path: /micro0/api/v1/registry, method: POST, ip: ::1, cost: 46.9226ms, response_body: 
+2025-04-08 15:42:58	traceId: 17297551-144d-11f0-b7d5-e4a8dfaceb3c	INFO	client/etcd.client.go:176	[Heartbeat ERROR] service: service-b, err: failed to check health: Get "http://127.0.0.1:8081//health": dial tcp 127.0.0.1:8081: connectex: No connection could be made because the target machine actively refused it.
+2025-04-08 15:54:04	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <GET /micro0/api/v1/health --> micro0/internal/api.ApiImpl.HealthDefaultApi.func1>	]
+2025-04-08 15:54:50	traceId: bfc46c45-144e-11f0-9e26-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/health, method: GET, ip: 127.0.0.1, query: , request_body: 
+2025-04-08 15:54:50	traceId: bfc46c45-144e-11f0-9e26-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:43	requst_info end: status: 200, path: /micro0/api/v1/health, method: GET, ip: 127.0.0.1, cost: 28.9833ms, response_body: {"code":0,"codeName":"success","message":"","resp":{"health":true},"url":""}
+2025-04-08 15:57:24	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <GET /micro0/api/v1/health --> micro0/internal/api.ApiImpl.HealthDefaultApi.func1>	]
+2025-04-08 15:57:29	traceId: 1ea95aac-144f-11f0-8179-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/health, method: GET, ip: 127.0.0.1, query: , request_body: 
+2025-04-08 15:57:29	traceId: 1ea95aac-144f-11f0-8179-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:43	requst_info end: status: 200, path: /micro0/api/v1/health, method: GET, ip: 127.0.0.1, cost: 18.9043ms, response_body: {"health":true}
+2025-04-08 16:09:48	traceId: 00000000-0000-0000-0000-000000000000	INFO	http/group.go:47	app server http urls:	[<POST /micro0/api/v1/registry --> micro0/internal/api.ApiImpl.RouterDefaultApi.func1>	 <GET /micro0/api/v1/health --> micro0/internal/api.ApiImpl.HealthDefaultApi.func1>	]
+2025-04-08 16:09:58	traceId: dcdc614c-1450-11f0-9a10-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:32	requst_info start: path: /micro0/api/v1/registry, method: POST, ip: ::1, query: , request_body: {"instanceId":"instance-123","ip":"127.0.0.1","name":"service-b","port":8081,"version":"v1.0.0"}
+2025-04-08 16:09:58	traceId: dcdc614c-1450-11f0-9a10-e4a8dfaceb3c	INFO	client/etcd.client.go:76	Registered service: /service/service-b
+2025-04-08 16:09:58	traceId: dcdc614c-1450-11f0-9a10-e4a8dfaceb3c	INFO	api/route.go:41	服务注册成功！{service-b v1.0.0  127.0.0.1 8081}
+2025-04-08 16:09:58	traceId: dcdc614c-1450-11f0-9a10-e4a8dfaceb3c	INFO	middleware/trace.log.middleware.go:43	requst_info end: status: 200, path: /micro0/api/v1/registry, method: POST, ip: ::1, cost: 49.4619ms, response_body: 
+2025-04-08 16:09:58	traceId: dcdc614c-1450-11f0-9a10-e4a8dfaceb3c	INFO	client/etcd.client.go:162	[Heartbeat ERROR] service: service-b, err: failed to check health: Get "http://127.0.0.1:8081//health": dial tcp 127.0.0.1:8081: connectex: No connection could be made because the target machine actively refused it.
