@@ -21,8 +21,9 @@ func HealthDefaultApi(r *gin.RouterGroup) {
 }
 
 // // 编写远程调用工具函数：如service-a 调用 service-b 服务中的函数
-func RemoteFunc(ctx context.Context, serviceName, method, path string, req map[string]any) (resp *http.Response, err error) {
-	return client.RemoteFunc(Registry, ctx, serviceName, method, path, req)
+func RemoteFunc(ctx context.Context, serviceName, method, path string, req map[string]any, lb string) (resp *http.Response, err error) {
+
+	return client.RemoteFunc(Registry, ctx, serviceName, method, path, req, lb)
 }
 
 var Registry *client.ServiceRegistry

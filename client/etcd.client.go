@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/LoveCatdd/micro0/internal/model"
+	"github.com/LoveCatdd/micro0/lb"
 
 	"github.com/LoveCatdd/util/pkg/lib/core/log"
 	clientv3 "go.etcd.io/etcd/client/v3"
@@ -126,7 +127,7 @@ func (r *ServiceRegistry) Heartbeat(service model.Service) error {
 	}
 
 	// 检查服务是否健康
-	if resp, err := RemoteFunc(r, ctx, service.Name, http.MethodGet, "health", nil); err != nil {
+	if resp, err := RemoteFunc(r, ctx, service.Name, http.MethodGet, "health", nil, ""); err != nil {
 		return fmt.Errorf("failed to check health: %w", err)
 	} else {
 
@@ -174,8 +175,8 @@ func (r *ServiceRegistry) StartHeartbeat(ctx context.Context, service model.Serv
 
 }
 
-// // 编写远程调用工具函数：如service-a 调用 service-b 服务中的函数
-func RemoteFunc(r *ServiceRegistry, ctx context.Context, serviceName, method, path string, req map[string]any) (resp *http.Response, err error) {
+// 编写远程调用工具函数：如service-a 调用 service-b 服务中的函数
+func RemoteFunc(r *ServiceRegistry, ctx context.Context, serviceName, method, path string, req map[string]any, lbType string) (resp *http.Response, err error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -186,14 +187,19 @@ func RemoteFunc(r *ServiceRegistry, ctx context.Context, serviceName, method, pa
 		return nil, fmt.Errorf("service %s not found", serviceName)
 	}
 
-	kv := client.Kvs[0]
-	var si ServiceInstance
-	if err := json.Unmarshal(kv.Value, &si); err != nil {
-		return nil, err
-	}
-	resp, err = http.Get(fmt.Sprintf(URL, si.IP, si.Port, path))
+	var si []ServiceInstance
 
-	return HttpFunc(ctx, fmt.Sprintf(URL, si.IP, si.Port, path), method, req)
+	for _, kv := range client.Kvs {
+		var instance ServiceInstance
+		if err := json.Unmarshal(kv.Value, &instance); err != nil {
+			return nil, err
+		}
+		si = append(si, instance)
+	}
+
+	// 调用负载均衡算法&超时重试
+
+	return CallWithRetryFailover(ctx, si, len(si), 1*time.Second, path, method, lbType, req, HttpFunc)
 }
 
 // HttpFunc 发送 HTTP 请求，支持 GET 和 POST 方法, 其他请求待实现
@@ -217,4 +223,62 @@ func HttpFunc(ctx context.Context, url, method string, req map[string]any) (*htt
 	default:
 		return nil, fmt.Errorf("unsupported method: %s", method)
 	}
+}
+
+// 超时重试
+func CallWithRetryFailover(
+	ctx context.Context,
+	sie []ServiceInstance,
+	maxAttempts int,
+	timeoutPerTry time.Duration,
+	url, method, lbType string, req map[string]any,
+	callFunc func(ctx context.Context, url, method string, req map[string]any) (*http.Response, error),
+) (*http.Response, error) {
+	tried := make(map[string]bool)
+
+	for i := 0; i < maxAttempts; i++ {
+		// 负载均衡获得节点
+		sc := lb.NewServerClient(
+			func() []lb.ServiceInstance {
+				var instances []lb.ServiceInstance
+				for _, instance := range sie {
+					if _, ok := tried[instance.IP]; !ok {
+						instances = append(instances, lb.ServiceInstance{
+							Address:       fmt.Sprintf(URL, instance.IP, instance.Port, url),
+							Weight:        1,
+							CurrentWeight: 1,
+							Healthy:       true,
+						})
+					}
+				}
+				return instances
+			}(),
+			lbType,
+			sie[0].ServiceName,
+		)
+		var lbSi *lb.ServiceInstance
+		for {
+			lbSi = sc.Next()
+
+			if lbSi == nil {
+				return nil, fmt.Errorf("no available service instance")
+			}
+
+			if !tried[lbSi.Address] {
+				tried[lbSi.Address] = true
+				break
+			}
+		}
+
+		// 发送请求
+		callCtx, cancel := context.WithTimeout(ctx, timeoutPerTry)
+		resp, err := callFunc(callCtx, lbSi.Address, method, req)
+		cancel()
+
+		if err == nil {
+			return resp, err
+		}
+		log.Errorf("attempt %d failed: %v, instance: %v", i+1, err, lbSi.Address)
+	}
+	return nil, fmt.Errorf("all attempts failed")
 }
